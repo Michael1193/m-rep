@@ -93,6 +93,10 @@ size: $(ELF)
 
 .PHONY: all clean size $(BUILDDIR)
 
+upload: $(ELF)
+	openocd -f interface/cmsis-dap.cfg  -f board/atmel_samv71_xplained_ultra.cfg -c init -c halt -c"flash write_image erase  $(ELF)" -c reset -c shutdown
+
+
 # Include the dependency files, should be the last of the makefile
 -include $(shell mkdir $(DEPDIR) 2>/dev/null) $(wildcard $(DEPDIR)/*)
 
