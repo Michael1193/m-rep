@@ -17,7 +17,7 @@ int main ()
         delay1();
         
     * ( ( unsigned long int * ) 0x400E0630 ) = 0x2;  //включает тактирование через PLLACK
-    * ( ( unsigned long int * ) 0x400E0628 ) = 0x190001;  //ставит умножитель PLLACK на 25 и делитель на 1
+    * ( ( unsigned long int * ) 0x400E0628 ) = 0x20180001;  //ставит умножитель PLLACK на 25 и делитель на 1 + бит one + 0 циклов медленнх часов
     
 
     * ( ( unsigned long int * ) 0x400E0610 ) = 0x400;//включает блок PIOA
