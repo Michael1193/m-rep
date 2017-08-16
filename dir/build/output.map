@@ -510,9 +510,9 @@ constructors    0x0000000000400140        0x0
                 0x0000000020460000                PROVIDE (__stack_end, (ORIGIN (RAM) + LENGTH (RAM)))
 OUTPUT(build/firmware.elf elf32-littlearm)
 
-.debug_info     0x0000000000000000      0xbcc
+.debug_info     0x0000000000000000      0xbc3
  .debug_info    0x0000000000000000      0x5f3 build/obj/crt0.o
- .debug_info    0x00000000000005f3      0x5d9 build/obj/main.o
+ .debug_info    0x00000000000005f3      0x5d0 build/obj/main.o
 
 .debug_abbrev   0x0000000000000000      0x2bb
  .debug_abbrev  0x0000000000000000      0x137 build/obj/crt0.o
@@ -645,9 +645,9 @@ OUTPUT(build/firmware.elf elf32-littlearm)
  .debug_macro   0x0000000000016dc6       0x87 build/obj/main.o
  .debug_macro   0x0000000000016e4d     0x1114 build/obj/main.o
 
-.debug_line     0x0000000000000000     0x150b
+.debug_line     0x0000000000000000     0x150a
  .debug_line    0x0000000000000000      0xa4a build/obj/crt0.o
- .debug_line    0x0000000000000a4a      0xac1 build/obj/main.o
+ .debug_line    0x0000000000000a4a      0xac0 build/obj/main.o
 
 .debug_str      0x0000000000000000    0x750b1
  .debug_str     0x0000000000000000    0x748d8 build/obj/crt0.o
