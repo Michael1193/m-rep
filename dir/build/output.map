@@ -348,7 +348,7 @@ constructors    0x0000000000400140        0x0
  *(.init_array)
                 0x0000000000400140                PROVIDE (__init_array_end, .)
 
-.text           0x0000000000400140      0x1a4
+.text           0x0000000000400140      0x19c
  *(.text.startup.*)
  *(.text)
  *(.text.*)
@@ -438,34 +438,34 @@ constructors    0x0000000000400140        0x0
                 0x00000000004001cc                SystemInit
  *fill*         0x00000000004001ce        0x2 
  .text._Z6delay1v
-                0x00000000004001d0       0x40 build/obj/main.o
+                0x00000000004001d0       0x48 build/obj/main.o
                 0x00000000004001d0                delay1()
- .text.main     0x0000000000400210       0xd4 build/obj/main.o
-                0x0000000000400210                main
+ .text.main     0x0000000000400218       0xc4 build/obj/main.o
+                0x0000000000400218                main
  *(.rodata)
  *(.rodata.*)
  *(.glue_7t)
- .glue_7t       0x00000000004002e4        0x0 linker stubs
+ .glue_7t       0x00000000004002dc        0x0 linker stubs
  *(.glue_7)
- .glue_7        0x00000000004002e4        0x0 linker stubs
+ .glue_7        0x00000000004002dc        0x0 linker stubs
  *(.gcc*)
 
-.vfp11_veneer   0x00000000004002e4        0x0
- .vfp11_veneer  0x00000000004002e4        0x0 linker stubs
+.vfp11_veneer   0x00000000004002dc        0x0
+ .vfp11_veneer  0x00000000004002dc        0x0 linker stubs
 
-.v4_bx          0x00000000004002e4        0x0
- .v4_bx         0x00000000004002e4        0x0 linker stubs
+.v4_bx          0x00000000004002dc        0x0
+ .v4_bx         0x00000000004002dc        0x0 linker stubs
 
-.iplt           0x00000000004002e4        0x0
- .iplt          0x00000000004002e4        0x0 build/obj/crt0.o
+.iplt           0x00000000004002dc        0x0
+ .iplt          0x00000000004002dc        0x0 build/obj/crt0.o
 
-.rel.dyn        0x00000000004002e4        0x0
- .rel.iplt      0x00000000004002e4        0x0 build/obj/crt0.o
+.rel.dyn        0x00000000004002dc        0x0
+ .rel.iplt      0x00000000004002dc        0x0 build/obj/crt0.o
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
 
-.ARM.exidx      0x00000000004002e4        0x0
+.ARM.exidx      0x00000000004002dc        0x0
                 [!provide]                        PROVIDE (__exidx_start, .)
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
                 [!provide]                        PROVIDE (__exidx_end, .)
@@ -476,14 +476,14 @@ constructors    0x0000000000400140        0x0
 .eh_frame
  *(.eh_frame)
 
-.textalign      0x00000000004002e4        0x4
-                0x00000000004002e8                . = ALIGN (0x8)
- *fill*         0x00000000004002e4        0x4 
-                0x00000000004002e8                . = ALIGN (0x4)
-                0x00000000004002e8                _etext = .
-                0x00000000004002e8                _textdata = _etext
+.textalign      0x00000000004002dc        0x4
+                0x00000000004002e0                . = ALIGN (0x8)
+ *fill*         0x00000000004002dc        0x4 
+                0x00000000004002e0                . = ALIGN (0x4)
+                0x00000000004002e0                _etext = .
+                0x00000000004002e0                _textdata = _etext
 
-.data           0x0000000020400000        0x0 load address 0x00000000004002e8
+.data           0x0000000020400000        0x0 load address 0x00000000004002e0
                 0x0000000020400000                . = ALIGN (0x4)
                 0x0000000020400000                PROVIDE (_data, .)
  *(.data)
@@ -494,10 +494,10 @@ constructors    0x0000000000400140        0x0
                 0x0000000020400000                . = ALIGN (0x4)
                 0x0000000020400000                PROVIDE (_edata, .)
 
-.igot.plt       0x0000000020400000        0x0 load address 0x00000000004002e8
+.igot.plt       0x0000000020400000        0x0 load address 0x00000000004002e0
  .igot.plt      0x0000000020400000        0x0 build/obj/crt0.o
 
-.bss            0x0000000020400000        0x0 load address 0x00000000004002e8
+.bss            0x0000000020400000        0x0 load address 0x00000000004002e0
                 0x0000000020400000                . = ALIGN (0x4)
                 0x0000000020400000                PROVIDE (_bss, .)
  *(.bss)
@@ -510,13 +510,13 @@ constructors    0x0000000000400140        0x0
                 0x0000000020460000                PROVIDE (__stack_end, (ORIGIN (RAM) + LENGTH (RAM)))
 OUTPUT(build/firmware.elf elf32-littlearm)
 
-.debug_info     0x0000000000000000      0xbc3
+.debug_info     0x0000000000000000     0x121b
  .debug_info    0x0000000000000000      0x5f3 build/obj/crt0.o
- .debug_info    0x00000000000005f3      0x5d0 build/obj/main.o
+ .debug_info    0x00000000000005f3      0xc28 build/obj/main.o
 
-.debug_abbrev   0x0000000000000000      0x2bb
+.debug_abbrev   0x0000000000000000      0x2f5
  .debug_abbrev  0x0000000000000000      0x137 build/obj/crt0.o
- .debug_abbrev  0x0000000000000137      0x184 build/obj/main.o
+ .debug_abbrev  0x0000000000000137      0x1be build/obj/main.o
 
 .debug_loc      0x0000000000000000       0xaf
  .debug_loc     0x0000000000000000       0x76 build/obj/crt0.o
@@ -645,15 +645,15 @@ OUTPUT(build/firmware.elf elf32-littlearm)
  .debug_macro   0x0000000000016dc6       0x87 build/obj/main.o
  .debug_macro   0x0000000000016e4d     0x1114 build/obj/main.o
 
-.debug_line     0x0000000000000000     0x150a
+.debug_line     0x0000000000000000     0x150b
  .debug_line    0x0000000000000000      0xa4a build/obj/crt0.o
- .debug_line    0x0000000000000a4a      0xac0 build/obj/main.o
+ .debug_line    0x0000000000000a4a      0xac1 build/obj/main.o
 
-.debug_str      0x0000000000000000    0x750b1
+.debug_str      0x0000000000000000    0x754d2
  .debug_str     0x0000000000000000    0x748d8 build/obj/crt0.o
                                       0x74de6 (size before relaxing)
- .debug_str     0x00000000000748d8      0x7d9 build/obj/main.o
-                                      0x74d7d (size before relaxing)
+ .debug_str     0x00000000000748d8      0xbfa build/obj/main.o
+                                      0x751a8 (size before relaxing)
 
 .comment        0x0000000000000000       0x7f
  .comment       0x0000000000000000       0x7f build/obj/crt0.o
