@@ -33,7 +33,7 @@ extern "C" void UsageFault_Handler ( void ){while(1){}}
 
 */
 
-void delay1(unsigned int s);
+void delay1(unsigned int ms);
 
 int main ()
 {  
@@ -56,7 +56,7 @@ int main ()
     
     SysTick->CTRL = SysTick_CTRL_CLKSOURCE_Msk | SysTick_CTRL_ENABLE_Msk; // или 0b0101   ( | SysTick_CTRL_TICKINT_Msk генерирует исключение) -------- учавствуют в активации systick
     
-    SysTick->LOAD = SysTick_LOAD_RELOAD_Msk; //reload registr   ------------ учавствуют в активации systick
+    SysTick->LOAD = 0x993E0U;  //SysTick_LOAD_RELOAD_Msk; //reload registr   ------------ учавствуют в активации systick
     
     //SysTick_Config(0x00FFFFFFU);
     
@@ -69,11 +69,11 @@ int main ()
         
         PIOA->PIO_CODR = PIO_PA23; //clear
         
-        delay1(1);
+        delay1(1000);
         
         PIOA->PIO_SODR = PIO_PA23; //set
         
-        delay1(1);
+        delay1(1000);
         
     }
     
@@ -81,23 +81,21 @@ int main ()
 }
 
 
-void delay1 (unsigned int s)
+void delay1 (unsigned int ms)
 {
-    unsigned int i = 0;
+    register unsigned int i = 0;
     
-        while( i < ( 18U * s ) )
+        while( i < ms )
         {
             SysTick -> VAL =  0x0U;
     
-            while ( ! ( ( SysTick->LOAD - ( SysTick -> VAL ) ) >  16000000U ) ) { }
+            while ( ! ( ( SysTick->LOAD - ( SysTick -> VAL ) ) >  300000U ) ) { }
             
             i += 1;
 
     
         }
 }
-
-// SysTick_Config(0x00FFFFFFU) (2381 core_cm7.h)  
 
     
     
@@ -120,5 +118,19 @@ void delay1 (unsigned int s)
  * component_pmc.h -- структура PMC настройка PLL
  * core_cm7.h  -- содержит структуру DWT_Type
  * 
- * instance_pioa.h  свойства регистра блока выходов a*/
+ * instance_pioa.h  свойства регистра блока выходов a
+ 
+ ------------------------------------------------------------------------
+ 
+ при активации прерываний в SysTick участвует функция
+ 
+ NVIC_SetPriority(IRQn_Type IRQn, uint32_t priority)  --- прототип(неполный)
+ 
+ NVIC_SetPriority (SysTick_IRQn, (1UL << __NVIC_PRIO_BITS) - 1UL); --- пример функции для systick
+ 
+ SysTick_IRQn = -1
+ 
+ 
+ 
+ */
 

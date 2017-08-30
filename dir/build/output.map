@@ -438,10 +438,10 @@ constructors    0x0000000000400140        0x0
                 0x00000000004001cc                SystemInit
  *fill*         0x00000000004001ce        0x2 
  .text._Z6delay1j
-                0x00000000004001d0       0x34 build/obj/main.o
+                0x00000000004001d0       0x2c build/obj/main.o
                 0x00000000004001d0                delay1(unsigned int)
- .text.main     0x0000000000400204       0xd8 build/obj/main.o
-                0x0000000000400204                main
+ .text.main     0x00000000004001fc       0xe0 build/obj/main.o
+                0x00000000004001fc                main
  *(.rodata)
  *(.rodata.*)
  *(.glue_7t)
@@ -510,17 +510,17 @@ constructors    0x0000000000400140        0x0
                 0x0000000020460000                PROVIDE (__stack_end, (ORIGIN (RAM) + LENGTH (RAM)))
 OUTPUT(build/firmware.elf elf32-littlearm)
 
-.debug_info     0x0000000000000000     0x1278
+.debug_info     0x0000000000000000     0x127d
  .debug_info    0x0000000000000000      0x5f3 build/obj/crt0.o
- .debug_info    0x00000000000005f3      0xc85 build/obj/main.o
+ .debug_info    0x00000000000005f3      0xc8a build/obj/main.o
 
 .debug_abbrev   0x0000000000000000      0x32c
  .debug_abbrev  0x0000000000000000      0x137 build/obj/crt0.o
  .debug_abbrev  0x0000000000000137      0x1f5 build/obj/main.o
 
-.debug_loc      0x0000000000000000       0xef
+.debug_loc      0x0000000000000000       0xfa
  .debug_loc     0x0000000000000000       0x76 build/obj/crt0.o
- .debug_loc     0x0000000000000076       0x79 build/obj/main.o
+ .debug_loc     0x0000000000000076       0x84 build/obj/main.o
 
 .debug_aranges  0x0000000000000000       0x58
  .debug_aranges
