@@ -11,6 +11,8 @@ DEF = -D __SAMV71Q21__
 
 INC = -Isrc/sys                         \
       -isystem libchip/include          \
+      -isystem libchip/source		\
+      -isystem libchip/			\
       -isystem libchip/include/cmsis/CMSIS/Include
 
 #

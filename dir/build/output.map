@@ -218,6 +218,10 @@ Discarded input sections
  .text          0x0000000000000000        0x0 build/obj/main.o
  .data          0x0000000000000000        0x0 build/obj/main.o
  .bss           0x0000000000000000        0x0 build/obj/main.o
+ .text._Z13UART_IsTxSentv
+                0x0000000000000000       0x10 build/obj/main.o
+ .text._Z14UART_IsRxReadyv
+                0x0000000000000000       0x10 build/obj/main.o
  .debug_macro   0x0000000000000000       0x22 build/obj/main.o
  .debug_macro   0x0000000000000000       0x51 build/obj/main.o
  .debug_macro   0x0000000000000000       0xef build/obj/main.o
@@ -348,7 +352,7 @@ constructors    0x0000000000400140        0x0
  *(.init_array)
                 0x0000000000400140                PROVIDE (__init_array_end, .)
 
-.text           0x0000000000400140      0x19c
+.text           0x0000000000400140      0x1cc
  *(.text.startup.*)
  *(.text)
  *(.text.*)
@@ -440,32 +444,32 @@ constructors    0x0000000000400140        0x0
  .text._Z6delay1j
                 0x00000000004001d0       0x2c build/obj/main.o
                 0x00000000004001d0                delay1(unsigned int)
- .text.main     0x00000000004001fc       0xe0 build/obj/main.o
+ .text.main     0x00000000004001fc      0x110 build/obj/main.o
                 0x00000000004001fc                main
  *(.rodata)
  *(.rodata.*)
  *(.glue_7t)
- .glue_7t       0x00000000004002dc        0x0 linker stubs
+ .glue_7t       0x000000000040030c        0x0 linker stubs
  *(.glue_7)
- .glue_7        0x00000000004002dc        0x0 linker stubs
+ .glue_7        0x000000000040030c        0x0 linker stubs
  *(.gcc*)
 
-.vfp11_veneer   0x00000000004002dc        0x0
- .vfp11_veneer  0x00000000004002dc        0x0 linker stubs
+.vfp11_veneer   0x000000000040030c        0x0
+ .vfp11_veneer  0x000000000040030c        0x0 linker stubs
 
-.v4_bx          0x00000000004002dc        0x0
- .v4_bx         0x00000000004002dc        0x0 linker stubs
+.v4_bx          0x000000000040030c        0x0
+ .v4_bx         0x000000000040030c        0x0 linker stubs
 
-.iplt           0x00000000004002dc        0x0
- .iplt          0x00000000004002dc        0x0 build/obj/crt0.o
+.iplt           0x000000000040030c        0x0
+ .iplt          0x000000000040030c        0x0 build/obj/crt0.o
 
-.rel.dyn        0x00000000004002dc        0x0
- .rel.iplt      0x00000000004002dc        0x0 build/obj/crt0.o
+.rel.dyn        0x000000000040030c        0x0
+ .rel.iplt      0x000000000040030c        0x0 build/obj/crt0.o
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
 
-.ARM.exidx      0x00000000004002dc        0x0
+.ARM.exidx      0x000000000040030c        0x0
                 [!provide]                        PROVIDE (__exidx_start, .)
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
                 [!provide]                        PROVIDE (__exidx_end, .)
@@ -476,14 +480,14 @@ constructors    0x0000000000400140        0x0
 .eh_frame
  *(.eh_frame)
 
-.textalign      0x00000000004002dc        0x4
-                0x00000000004002e0                . = ALIGN (0x8)
- *fill*         0x00000000004002dc        0x4 
-                0x00000000004002e0                . = ALIGN (0x4)
-                0x00000000004002e0                _etext = .
-                0x00000000004002e0                _textdata = _etext
+.textalign      0x000000000040030c        0x4
+                0x0000000000400310                . = ALIGN (0x8)
+ *fill*         0x000000000040030c        0x4 
+                0x0000000000400310                . = ALIGN (0x4)
+                0x0000000000400310                _etext = .
+                0x0000000000400310                _textdata = _etext
 
-.data           0x0000000020400000        0x0 load address 0x00000000004002e0
+.data           0x0000000020400000        0x0 load address 0x0000000000400310
                 0x0000000020400000                . = ALIGN (0x4)
                 0x0000000020400000                PROVIDE (_data, .)
  *(.data)
@@ -494,10 +498,10 @@ constructors    0x0000000000400140        0x0
                 0x0000000020400000                . = ALIGN (0x4)
                 0x0000000020400000                PROVIDE (_edata, .)
 
-.igot.plt       0x0000000020400000        0x0 load address 0x00000000004002e0
+.igot.plt       0x0000000020400000        0x0 load address 0x0000000000400310
  .igot.plt      0x0000000020400000        0x0 build/obj/crt0.o
 
-.bss            0x0000000020400000        0x0 load address 0x00000000004002e0
+.bss            0x0000000020400000        0x0 load address 0x0000000000400310
                 0x0000000020400000                . = ALIGN (0x4)
                 0x0000000020400000                PROVIDE (_bss, .)
  *(.bss)
@@ -510,29 +514,29 @@ constructors    0x0000000000400140        0x0
                 0x0000000020460000                PROVIDE (__stack_end, (ORIGIN (RAM) + LENGTH (RAM)))
 OUTPUT(build/firmware.elf elf32-littlearm)
 
-.debug_info     0x0000000000000000     0x127d
+.debug_info     0x0000000000000000     0x1383
  .debug_info    0x0000000000000000      0x5f3 build/obj/crt0.o
- .debug_info    0x00000000000005f3      0xc8a build/obj/main.o
+ .debug_info    0x00000000000005f3      0xd90 build/obj/main.o
 
-.debug_abbrev   0x0000000000000000      0x32c
+.debug_abbrev   0x0000000000000000      0x346
  .debug_abbrev  0x0000000000000000      0x137 build/obj/crt0.o
- .debug_abbrev  0x0000000000000137      0x1f5 build/obj/main.o
+ .debug_abbrev  0x0000000000000137      0x20f build/obj/main.o
 
 .debug_loc      0x0000000000000000       0xfa
  .debug_loc     0x0000000000000000       0x76 build/obj/crt0.o
  .debug_loc     0x0000000000000076       0x84 build/obj/main.o
 
-.debug_aranges  0x0000000000000000       0x58
+.debug_aranges  0x0000000000000000       0x68
  .debug_aranges
                 0x0000000000000000       0x28 build/obj/crt0.o
  .debug_aranges
-                0x0000000000000028       0x30 build/obj/main.o
+                0x0000000000000028       0x40 build/obj/main.o
 
-.debug_ranges   0x0000000000000000       0x38
+.debug_ranges   0x0000000000000000       0x48
  .debug_ranges  0x0000000000000000       0x18 build/obj/crt0.o
- .debug_ranges  0x0000000000000018       0x20 build/obj/main.o
+ .debug_ranges  0x0000000000000018       0x30 build/obj/main.o
 
-.debug_macro    0x0000000000000000    0x17f65
+.debug_macro    0x0000000000000000    0x17f6d
  .debug_macro   0x0000000000000000      0x468 build/obj/crt0.o
  .debug_macro   0x0000000000000468      0x8b0 build/obj/crt0.o
  .debug_macro   0x0000000000000d18       0x22 build/obj/crt0.o
@@ -639,21 +643,21 @@ OUTPUT(build/firmware.elf elf32-littlearm)
  .debug_macro   0x0000000000014b69      0x329 build/obj/crt0.o
  .debug_macro   0x0000000000014e92     0x1028 build/obj/crt0.o
  .debug_macro   0x0000000000015eba      0x107 build/obj/crt0.o
- .debug_macro   0x0000000000015fc1      0x46b build/obj/main.o
- .debug_macro   0x000000000001642c      0x982 build/obj/main.o
- .debug_macro   0x0000000000016dae       0x1c build/obj/main.o
- .debug_macro   0x0000000000016dca       0x87 build/obj/main.o
- .debug_macro   0x0000000000016e51     0x1114 build/obj/main.o
+ .debug_macro   0x0000000000015fc1      0x473 build/obj/main.o
+ .debug_macro   0x0000000000016434      0x982 build/obj/main.o
+ .debug_macro   0x0000000000016db6       0x1c build/obj/main.o
+ .debug_macro   0x0000000000016dd2       0x87 build/obj/main.o
+ .debug_macro   0x0000000000016e59     0x1114 build/obj/main.o
 
-.debug_line     0x0000000000000000     0x150f
+.debug_line     0x0000000000000000     0x152b
  .debug_line    0x0000000000000000      0xa4a build/obj/crt0.o
- .debug_line    0x0000000000000a4a      0xac5 build/obj/main.o
+ .debug_line    0x0000000000000a4a      0xae1 build/obj/main.o
 
-.debug_str      0x0000000000000000    0x754f1
+.debug_str      0x0000000000000000    0x755ab
  .debug_str     0x0000000000000000    0x748d8 build/obj/crt0.o
                                       0x74de6 (size before relaxing)
- .debug_str     0x00000000000748d8      0xc19 build/obj/main.o
-                                      0x751d4 (size before relaxing)
+ .debug_str     0x00000000000748d8      0xcd3 build/obj/main.o
+                                      0x75293 (size before relaxing)
 
 .comment        0x0000000000000000       0x7f
  .comment       0x0000000000000000       0x7f build/obj/crt0.o
@@ -667,6 +671,6 @@ OUTPUT(build/firmware.elf elf32-littlearm)
  .ARM.attributes
                 0x0000000000000033       0x33 build/obj/main.o
 
-.debug_frame    0x0000000000000000       0x88
+.debug_frame    0x0000000000000000       0xa8
  .debug_frame   0x0000000000000000       0x30 build/obj/crt0.o
- .debug_frame   0x0000000000000030       0x58 build/obj/main.o
+ .debug_frame   0x0000000000000030       0x78 build/obj/main.o

@@ -104,7 +104,9 @@ build/obj/main.o: src/main.cpp libchip/include/samv71/samv71.h \
  libchip/include/samv71/instance/instance_uart2.h \
  libchip/include/samv71/instance/instance_uart3.h \
  libchip/include/samv71/instance/instance_uart4.h \
- libchip/include/samv71/pio/pio_samv71q21.h
+ libchip/include/samv71/pio/pio_samv71q21.h \
+ libchip/include/samv71/samv71q21.h \
+ libchip/include/samv71/component/component_uart.h
 
 libchip/include/samv71/samv71.h:
 
@@ -319,3 +321,7 @@ libchip/include/samv71/instance/instance_uart3.h:
 libchip/include/samv71/instance/instance_uart4.h:
 
 libchip/include/samv71/pio/pio_samv71q21.h:
+
+libchip/include/samv71/samv71q21.h:
+
+libchip/include/samv71/component/component_uart.h:
