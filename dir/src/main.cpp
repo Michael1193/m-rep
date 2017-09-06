@@ -2,7 +2,7 @@
 #include <samv71/samv71q21.h>
 #include <core_cm7.h>
 #include <samv71/component/component_uart.h>
-#include <uart.c>
+
 
 
 extern "C" void SystemInit()
@@ -41,6 +41,7 @@ uint32_t UART_IsRxReady();
   
 void delay1(unsigned int ms);
 
+
 int main ()
 {  
     
@@ -52,40 +53,55 @@ int main ()
     
     PMC->CKGR_PLLAR=CKGR_PLLAR_ONE | CKGR_PLLAR_MULA(24) | CKGR_PLLAR_PLLACOUNT(0) | CKGR_PLLAR_DIVA(1);      //REG_CKGR_PLLAR  = 0x20180001;  //ставит умножитель PLLACK на 25 и делитель на 1 + бит one + 0 циклов медленнх часов
 
-    PMC->PMC_PCER0 = PMC_PCER0_PID10; //включает тактирование периферии включая PIOA
+    PMC->PMC_PCER0 = PMC_PCER0_PID10 | PMC_PCER0_PID16; //включает тактирование периферии включая PIOA , PIOD
     
-    PMC->PMC_PCER0 = PMC_PCER0_PID11; //включает тактирование периферии включая PIOB
-    
-    PMC->PMC_PCER0 = PMC_PCER0_PID7; //включает переферию uart0
-    
-    
-    
-    
-    PIOA->PIO_PER=PIO_PA23; //активровали пин в блоке PIOA  (через смещение в файле)        * ( ( unsigned int * ) 0x400E0E00 ) = 0x800000;
-    
-    PIOA->PIO_OWDR=PIO_PA23; //REG_PIOA_OWDR = PIO_PA23; //разрешает изменение PIO_OWDR
-    
-    PIOA->PIO_OER=PIO_PA23;  //REG_PIOA_OER = PIO_PA23; //активирует линию входа/выхода на пине
-    
-    
-    
+    PMC->PMC_PCER1 = PMC_PCER1_PID45; //включает тактирование периферии uart3 (PCER1 регистр отвечает за переферию начинающуюся с 32 номера)
     
     SysTick->CTRL = SysTick_CTRL_CLKSOURCE_Msk | SysTick_CTRL_ENABLE_Msk; // или 0b0101   ( | SysTick_CTRL_TICKINT_Msk генерирует исключение) -------- учавствуют в активации systick
     
     SysTick->LOAD = 0x993E0U;  //SysTick_LOAD_RELOAD_Msk; //reload registr   ------------ учавствуют в активации systick
     
+    PIOD->PIO_PDR=PIO_PD28 | PIO_PD30; //активирует пины rx и tx для периферии uart3
+    
+    PIOD-> PIO_ABCDSR [1] = 0x00000000;
+    PIOD-> PIO_ABCDSR [2] = 0x00000000;
+    
+    PIOD-> PIO_PUER = PIO_PD28 | PIO_PD30;
+    
+    
+    PIOA->PIO_PER=PIO_PA23; //активровали пин в блоке PIOA       * ( ( unsigned int * ) 0x400E0E00 ) = 0x800000;
+    
+    PIOA->PIO_OWDR=PIO_PA23;  //разрешает изменение PIO_OWDR
+    
+    PIOA->PIO_OER=PIO_PA23;  //REG_PIOA_OER = PIO_PA23; //активирует линию входа/выхода на пине
+    
+    
+
+    
+    
+    //PIOB->PIO_PER=PIO_PB4; //активровали пин в блоке PIOB    
+    
+   // PIOB->PIO_OWDR=PIO_PB4;  //разрешает изменение PIO_OWDR
+        
+    //PIOA->PIO_PDR=PIO_PA9 | PIO_PA10; // отключаем контакты чтобы переферия могла их использовать
+    
+    //прочитать пункт 32.5.2  узнать про регистр PIO_ABCDSR1
     
     
     
-    UART0->UART_CR = UART_CR_RSTRX | UART_CR_RSTTX | UART_CR_RXDIS | UART_CR_TXDIS | UART_CR_RSTSTA;  /* Reset and disable receiver & transmitter*/
+    
+    
+    
+    
+    UART3->UART_CR = UART_CR_RSTRX | UART_CR_RSTTX | UART_CR_RXDIS | UART_CR_TXDIS | UART_CR_RSTSTA;  /* Reset and disable receiver & transmitter*/
                                     
-    UART0->UART_IDR = 0xFFFFFFFF; //reset interupt register uart
+    UART3->UART_IDR = 0xFFFFFFFF; //reset interupt register uart
     
-    UART0->UART_MR = UART_MR_FILTER_DISABLED | UART_MR_PAR_NO | UART_MR_BRSRCCK_PMC_PCK | UART_MR_CHMODE_AUTOMATIC; // mode register
+    UART3->UART_MR = UART_MR_FILTER_DISABLED | UART_MR_PAR_NO | UART_MR_BRSRCCK_PMC_PCK | UART_MR_CHMODE_AUTOMATIC; // mode register
     
-    UART0->UART_BRGR = (300000000U / 9600U) / 16;
+    UART3->UART_BRGR = (300000000U / 9600U) / 16U;
     
-    UART0->UART_CR = UART_CR_TXEN | UART_CR_RXEN;
+    UART3->UART_CR = UART_CR_TXEN | UART_CR_RXEN;
     
         //UART0->UART_MR = UART_MR_FILTER_DISABLED | UART_MR_PAR_NO | UART_MR_BRSRCCK_PMC_PCK | UART_MR_CHMODE_NORMAL; // mode register
 
@@ -93,7 +109,7 @@ int main ()
     
     
   
-
+//breakpoint
 
    
 
@@ -115,18 +131,27 @@ int main ()
 
         */
         
-        
-        if((UART0->UART_SR) == 0b010)
-        {
-            PIOA->PIO_CODR = PIO_PA23; //clear
+                if((UART3->UART_SR) == 0b010)
+                {
+            PIOA->PIO_CODR = PIO_PA23; //clear зажечь диод
         
             delay1(500);
+            
+            PIOA->PIO_SODR = PIO_PA23; //set  погасить диод
+            
+            delay1(500);
+                }else{
+                    PIOA->PIO_CODR = PIO_PA23; //clear
+        
+            delay1(2000);
             
             PIOA->PIO_SODR = PIO_PA23; //set
             
-            delay1(500);
-        }
+            delay1(2000);
+                }
     }
+    
+    
     
      
 }
@@ -147,6 +172,7 @@ void delay1 (unsigned int ms)
     
         }
 }
+
 
 
 

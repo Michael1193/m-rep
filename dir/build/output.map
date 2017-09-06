@@ -352,7 +352,7 @@ constructors    0x0000000000400140        0x0
  *(.init_array)
                 0x0000000000400140                PROVIDE (__init_array_end, .)
 
-.text           0x0000000000400140      0x1cc
+.text           0x0000000000400140      0x1f4
  *(.text.startup.*)
  *(.text)
  *(.text.*)
@@ -444,32 +444,32 @@ constructors    0x0000000000400140        0x0
  .text._Z6delay1j
                 0x00000000004001d0       0x2c build/obj/main.o
                 0x00000000004001d0                delay1(unsigned int)
- .text.main     0x00000000004001fc      0x110 build/obj/main.o
+ .text.main     0x00000000004001fc      0x138 build/obj/main.o
                 0x00000000004001fc                main
  *(.rodata)
  *(.rodata.*)
  *(.glue_7t)
- .glue_7t       0x000000000040030c        0x0 linker stubs
+ .glue_7t       0x0000000000400334        0x0 linker stubs
  *(.glue_7)
- .glue_7        0x000000000040030c        0x0 linker stubs
+ .glue_7        0x0000000000400334        0x0 linker stubs
  *(.gcc*)
 
-.vfp11_veneer   0x000000000040030c        0x0
- .vfp11_veneer  0x000000000040030c        0x0 linker stubs
+.vfp11_veneer   0x0000000000400334        0x0
+ .vfp11_veneer  0x0000000000400334        0x0 linker stubs
 
-.v4_bx          0x000000000040030c        0x0
- .v4_bx         0x000000000040030c        0x0 linker stubs
+.v4_bx          0x0000000000400334        0x0
+ .v4_bx         0x0000000000400334        0x0 linker stubs
 
-.iplt           0x000000000040030c        0x0
- .iplt          0x000000000040030c        0x0 build/obj/crt0.o
+.iplt           0x0000000000400334        0x0
+ .iplt          0x0000000000400334        0x0 build/obj/crt0.o
 
-.rel.dyn        0x000000000040030c        0x0
- .rel.iplt      0x000000000040030c        0x0 build/obj/crt0.o
+.rel.dyn        0x0000000000400334        0x0
+ .rel.iplt      0x0000000000400334        0x0 build/obj/crt0.o
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
 
-.ARM.exidx      0x000000000040030c        0x0
+.ARM.exidx      0x0000000000400334        0x0
                 [!provide]                        PROVIDE (__exidx_start, .)
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
                 [!provide]                        PROVIDE (__exidx_end, .)
@@ -480,14 +480,14 @@ constructors    0x0000000000400140        0x0
 .eh_frame
  *(.eh_frame)
 
-.textalign      0x000000000040030c        0x4
-                0x0000000000400310                . = ALIGN (0x8)
- *fill*         0x000000000040030c        0x4 
-                0x0000000000400310                . = ALIGN (0x4)
-                0x0000000000400310                _etext = .
-                0x0000000000400310                _textdata = _etext
+.textalign      0x0000000000400334        0x4
+                0x0000000000400338                . = ALIGN (0x8)
+ *fill*         0x0000000000400334        0x4 
+                0x0000000000400338                . = ALIGN (0x4)
+                0x0000000000400338                _etext = .
+                0x0000000000400338                _textdata = _etext
 
-.data           0x0000000020400000        0x0 load address 0x0000000000400310
+.data           0x0000000020400000        0x0 load address 0x0000000000400338
                 0x0000000020400000                . = ALIGN (0x4)
                 0x0000000020400000                PROVIDE (_data, .)
  *(.data)
@@ -498,10 +498,10 @@ constructors    0x0000000000400140        0x0
                 0x0000000020400000                . = ALIGN (0x4)
                 0x0000000020400000                PROVIDE (_edata, .)
 
-.igot.plt       0x0000000020400000        0x0 load address 0x0000000000400310
+.igot.plt       0x0000000020400000        0x0 load address 0x0000000000400338
  .igot.plt      0x0000000020400000        0x0 build/obj/crt0.o
 
-.bss            0x0000000020400000        0x0 load address 0x0000000000400310
+.bss            0x0000000020400000        0x0 load address 0x0000000000400338
                 0x0000000020400000                . = ALIGN (0x4)
                 0x0000000020400000                PROVIDE (_bss, .)
  *(.bss)
@@ -514,9 +514,9 @@ constructors    0x0000000000400140        0x0
                 0x0000000020460000                PROVIDE (__stack_end, (ORIGIN (RAM) + LENGTH (RAM)))
 OUTPUT(build/firmware.elf elf32-littlearm)
 
-.debug_info     0x0000000000000000     0x1383
+.debug_info     0x0000000000000000     0x13af
  .debug_info    0x0000000000000000      0x5f3 build/obj/crt0.o
- .debug_info    0x00000000000005f3      0xd90 build/obj/main.o
+ .debug_info    0x00000000000005f3      0xdbc build/obj/main.o
 
 .debug_abbrev   0x0000000000000000      0x346
  .debug_abbrev  0x0000000000000000      0x137 build/obj/crt0.o
@@ -649,9 +649,9 @@ OUTPUT(build/firmware.elf elf32-littlearm)
  .debug_macro   0x0000000000016dd2       0x87 build/obj/main.o
  .debug_macro   0x0000000000016e59     0x1114 build/obj/main.o
 
-.debug_line     0x0000000000000000     0x152b
+.debug_line     0x0000000000000000     0x153b
  .debug_line    0x0000000000000000      0xa4a build/obj/crt0.o
- .debug_line    0x0000000000000a4a      0xae1 build/obj/main.o
+ .debug_line    0x0000000000000a4a      0xaf1 build/obj/main.o
 
 .debug_str      0x0000000000000000    0x755ab
  .debug_str     0x0000000000000000    0x748d8 build/obj/crt0.o
